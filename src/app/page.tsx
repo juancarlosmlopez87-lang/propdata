@@ -58,20 +58,23 @@ const ZONES = ['Marbella', 'Mijas', 'Estepona', 'Benahavis', 'Ojen', 'Fuengirola
 export default function Home() {
   const [email, setEmail] = useState('')
   const [sent, setSent] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [faq, setFaq] = useState<number | null>(null)
 
   async function handleTrial(plan: string) {
-    if (!email.includes('@')) {
+    if (!email.includes('@') || !email.includes('.')) {
       document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })
       return
     }
+    setLoading(true)
     try {
-      await fetch(`https://api.telegram.org/bot8451701836:AAHnoYbzI14jnyCVtfx05iuA_CfkYKwPtX8/sendMessage`, {
+      await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chat_id: '1802913178', text: `🏗️ PROPDATA LEAD\nPlan: ${plan}\nEmail: ${email}\nFecha: ${new Date().toISOString()}` }),
+        body: JSON.stringify({ plan, email }),
       })
     } catch {}
+    setLoading(false)
     setSent(true)
   }
 
