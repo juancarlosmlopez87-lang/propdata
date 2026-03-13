@@ -65,18 +65,33 @@ export default function Home() {
 
   async function handleTrial(plan: string) {
     if (!email.includes('@') || !email.includes('.')) {
-      setEmailError('Por favor, introduce un email válido (ejemplo: tu@empresa.com)')
+      setEmailError('Introduce un email válido (ejemplo: tu@empresa.com)')
       document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })
       return
     }
-    setEmailError('')
     setLoading(true)
+    setEmailError('')
     try {
+      // 1. Capture lead
       await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ plan, email }),
       })
+
+      // 2. Try Stripe checkout for paid plans
+      if (['Explorer', 'Analyst', 'Enterprise'].includes(plan)) {
+        const res = await fetch('/api/checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ plan: plan.toLowerCase(), email }),
+        })
+        const data = await res.json()
+        if (data.url) {
+          window.location.href = data.url
+          return
+        }
+      }
     } catch {}
     setLoading(false)
     setSent(true)
