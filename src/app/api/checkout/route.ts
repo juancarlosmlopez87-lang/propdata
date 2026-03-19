@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
     params.set('metadata[plan]', planData.name);
     params.set('metadata[email]', email);
     params.set('metadata[billing]', annual ? 'annual' : 'monthly');
-    params.set('invoice_creation[enabled]', 'true');
+    // Note: subscriptions auto-generate invoices in Stripe, no need for invoice_creation
 
     const response = await fetch('https://api.stripe.com/v1/checkout/sessions', {
       method: 'POST',
