@@ -47,8 +47,8 @@ export async function POST(req: NextRequest) {
     params.append('line_items[0][price_data][recurring][interval]', planData.interval);
     params.append('line_items[0][quantity]', '1');
     params.append('mode', 'subscription');
-    params.append('success_url', `${origin}/?payment=success&plan=${plan}`);
-    params.append('cancel_url', `${origin}/?payment=cancelled`);
+    params.set('success_url', `${origin}/`);
+    params.set('cancel_url', `${origin}/`);
     params.append('metadata[plan]', planData.name);
     params.append('metadata[email]', email);
 
