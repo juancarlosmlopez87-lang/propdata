@@ -15,7 +15,7 @@ const PLANS = [
     period: '/mes',
     desc: 'Para agentes individuales',
     features: ['100 parcelas/mes', 'Búsqueda por zona y superficie', 'Datos básicos de parcela', 'Alertas semanales', 'Soporte email'],
-    cta: 'Empezar Prueba Gratis',
+    cta: 'Prueba 7 Dias',
     popular: false,
   },
   {
@@ -24,7 +24,7 @@ const PLANS = [
     period: '/mes',
     desc: 'Para agencias inmobiliarias',
     features: ['Parcelas ilimitadas', 'Datos completos + propietarios', 'API de integración', 'Informes PDF descargables', 'Alertas diarias personalizadas', 'Análisis de zona con oportunidades', 'Soporte prioritario'],
-    cta: 'Empezar Prueba Gratis',
+    cta: 'Prueba 7 Dias',
     popular: true,
   },
   {
@@ -99,7 +99,7 @@ export default function Home() {
 
   const FAQS = [
     { q: '¿De dónde vienen los datos?', a: 'Procesamos datos públicos del Catastro, registros urbanísticos y fuentes oficiales. Los enriquecemos con análisis propio de mercado, valores de referencia y tendencias.' },
-    { q: '¿Puedo probar gratis?', a: 'Sí, ofrecemos 7 días de prueba gratuita en todos los planes. Sin tarjeta de crédito. Cancela cuando quieras.' },
+    { q: '¿Puedo probar antes de pagar?', a: 'Si, ofrecemos 7 dias de prueba en todos los planes. Sin tarjeta de credito. Cancela cuando quieras.' },
     { q: '¿Qué zonas cubrís?', a: 'Actualmente cubrimos Costa del Sol (Málaga) con 11 zonas y estamos expandiendo a Costa Blanca (Alicante). Nuevas zonas cada mes.' },
     { q: '¿Puedo integrar los datos en mi CRM?', a: 'Sí, los planes Analyst y Enterprise incluyen acceso API REST completo con documentación y SDKs para PHP, Python y JavaScript.' },
     { q: '¿Los datos de propietarios son legales?', a: 'Sí, toda la información proviene de fuentes públicas oficiales (Catastro, Registro de la Propiedad). Cumplimos con RGPD.' },
@@ -121,8 +121,11 @@ export default function Home() {
             <a href="#faq" className="hover:text-brand-600 transition">FAQ</a>
           </div>
           <div className="flex items-center gap-3">
-            <a href="#pricing" className="hidden sm:inline-block bg-brand-600 text-white px-5 py-2 rounded-lg text-sm font-bold hover:bg-brand-700 transition">
-              Prueba Gratis
+            <a href="/login" className="hidden sm:inline-block text-sm text-gray-600 hover:text-brand-600 transition font-medium">
+              Entrar
+            </a>
+            <a href="/registro" className="hidden sm:inline-block bg-brand-600 text-white px-5 py-2 rounded-lg text-sm font-bold hover:bg-brand-700 transition">
+              Crear Cuenta
             </a>
             <button
               onClick={() => setMobileMenu(!mobileMenu)}
@@ -141,8 +144,9 @@ export default function Home() {
             <a href="#pricing" onClick={() => setMobileMenu(false)} className="block py-3 text-sm text-gray-700 hover:text-brand-600 transition border-b border-gray-50">Precios</a>
             <a href="#zones" onClick={() => setMobileMenu(false)} className="block py-3 text-sm text-gray-700 hover:text-brand-600 transition border-b border-gray-50">Zonas</a>
             <a href="#faq" onClick={() => setMobileMenu(false)} className="block py-3 text-sm text-gray-700 hover:text-brand-600 transition border-b border-gray-50">FAQ</a>
-            <a href="#pricing" onClick={() => setMobileMenu(false)} className="block mt-3 bg-brand-600 text-white text-center px-5 py-3 rounded-lg text-sm font-bold hover:bg-brand-700 transition">
-              Prueba Gratis
+            <a href="/login" onClick={() => setMobileMenu(false)} className="block py-3 text-sm text-gray-700 hover:text-brand-600 transition border-b border-gray-50">Entrar</a>
+            <a href="/registro" onClick={() => setMobileMenu(false)} className="block mt-3 bg-brand-600 text-white text-center px-5 py-3 rounded-lg text-sm font-bold hover:bg-brand-700 transition">
+              Crear Cuenta
             </a>
           </div>
         )}
@@ -177,7 +181,7 @@ export default function Home() {
                 disabled={loading || !email}
                 className="bg-brand-500 hover:bg-brand-600 text-white font-bold px-8 py-4 rounded-xl transition text-base shadow-lg shadow-brand-500/25 whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {loading ? 'Enviando...' : 'Prueba 7 Días Gratis'}
+                {loading ? 'Enviando...' : 'Probar 7 Dias'}
               </button>
             </div>
             {emailError && <p className="text-red-400 text-sm mb-4">{emailError}</p>}
@@ -337,7 +341,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-14">
             <h2 className="text-3xl md:text-4xl font-black">Planes simples, datos potentes</h2>
-            <p className="text-gray-400 mt-3">7 días gratis en todos los planes. Sin tarjeta de crédito.</p>
+            <p className="text-gray-400 mt-3">7 dias de prueba en todos los planes. Sin tarjeta de crédito.</p>
           </div>
 
           {!sent && (
@@ -390,7 +394,7 @@ export default function Home() {
             ))}
           </div>
 
-          <p className="text-center text-gray-500 text-xs mt-8">IVA no incluido. Factura disponible. Pago mensual o anual (2 meses gratis). Prueba gratuita de 7 días.</p>
+          <p className="text-center text-gray-500 text-xs mt-8">IVA no incluido. Factura disponible. Pago mensual o anual (20% dto.). Prueba de 7 dias incluida.</p>
         </div>
       </section>
 
@@ -445,8 +449,8 @@ export default function Home() {
       {/* FINAL CTA */}
       <section className="py-20 bg-brand-600 text-white text-center">
         <div className="max-w-2xl mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-black mb-4">Empieza hoy. Gratis.</h2>
-          <p className="text-brand-100 mb-8 text-lg">7 días de prueba gratuita. Sin tarjeta. Acceso completo.</p>
+          <h2 className="text-3xl md:text-4xl font-black mb-4">Empieza hoy. 7 dias de prueba.</h2>
+          <p className="text-brand-100 mb-8 text-lg">Prueba completa de 7 dias. Sin tarjeta. Acceso a todos los datos.</p>
           <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
             <input
               type="email"
@@ -460,7 +464,7 @@ export default function Home() {
               disabled={loading || !email}
               className="bg-white text-brand-700 font-black px-8 py-4 rounded-xl hover:bg-gray-100 transition whitespace-nowrap shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? 'Enviando...' : 'Empezar Gratis'}
+              {loading ? 'Enviando...' : 'Probar 7 Dias'}
             </button>
           </div>
           {emailError && <p className="text-red-300 text-sm mt-3">{emailError}</p>}

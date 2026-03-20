@@ -39,9 +39,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               description: 'Inteligencia inmobiliaria para profesionales. Datos de 5,000+ parcelas en Costa del Sol y Costa Blanca.',
               operatingSystem: 'Web',
               offers: [
-                { '@type': 'Offer', name: 'Explorer', price: '49', priceCurrency: 'EUR' },
-                { '@type': 'Offer', name: 'Pro', price: '149', priceCurrency: 'EUR' },
-                { '@type': 'Offer', name: 'Enterprise', price: '499', priceCurrency: 'EUR' },
+                { '@type': 'Offer', name: 'Explorer', price: '79', priceCurrency: 'EUR' },
+                { '@type': 'Offer', name: 'Analyst', price: '249', priceCurrency: 'EUR' },
+                { '@type': 'Offer', name: 'Enterprise', price: '799', priceCurrency: 'EUR' },
               ],
             }),
           }}
